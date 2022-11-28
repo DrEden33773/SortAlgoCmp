@@ -1,0 +1,18 @@
+[
+  {
+    "directory": "/home/eden/CollegeLearningRepo/DS_CurriculumDesign/SortAlgoCmp",
+    "arguments": [
+      "/usr/bin/clang",
+      "-c",
+      "-Qunused-arguments",
+      "-m64",
+      "-g",
+      "-O0",
+      "-std=c++20",
+      "-o",
+      "build/.objs/HuffmanCompress/linux/x86_64/debug/src/main.cpp.o",
+      "src/main.cpp"
+    ],
+    "file": "src/main.cpp"
+  }
+]
