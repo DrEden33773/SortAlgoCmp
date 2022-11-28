@@ -99,6 +99,7 @@ Iter Partition(Iter begin, Iter end) {
     using std::advance;
     using std::distance;
     using std::next;
+    using std::prev;
     using std::swap;
 
     Iter pivot = begin;
