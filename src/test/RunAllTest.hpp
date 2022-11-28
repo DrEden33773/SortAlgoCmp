@@ -14,6 +14,7 @@
 #include "BubbleTest.hpp"
 #include "InsertTest.hpp"
 #include "MergeSortTest.hpp"
+#include "QuickSortTest.hpp"
 #include "SelectionTest.hpp"
 
 #include <functional>
@@ -25,6 +26,7 @@ static const std::vector<std::function<void()>> AllTest {
     InsertSortTest,
     SelectionSortTest,
     MergeSortTest,
+    QuickSortTest,
 };
 
 void run_all_test() {
