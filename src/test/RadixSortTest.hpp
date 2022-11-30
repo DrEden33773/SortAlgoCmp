@@ -22,7 +22,11 @@ void RadixSortTest() {
     title_info("RadixSort");
     // std::vector
     {
-        std::vector<size_t> vec { 900, 22, 71, 565, 3134, 41, 19, 0 };
+        std::vector<size_t> vec {
+            900, 22, 71,
+            565, 3134, 41,
+            19, 0, 123
+        };
 
         std::cout << "vec raw => ";
         Println(vec.begin(), vec.end());
