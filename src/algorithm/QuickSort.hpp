@@ -68,7 +68,7 @@ template <class T>
 requires std::equality_comparable<T>
 void QS(std::vector<T>& vec, int begin, int end) {
     if (end - begin > 1) {
-        // [begin, end) contain at least `1 element`
+        // [begin, end) contain at least `2 elements`
         int pivot = Partition(vec, begin, end);
         QS(vec, begin, pivot);
         QS(vec, pivot + 1, end);

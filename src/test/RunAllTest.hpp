@@ -12,9 +12,11 @@
 #pragma once
 
 #include "BubbleTest.hpp"
+#include "HeapSortTest.hpp"
 #include "InsertTest.hpp"
 #include "MergeSortTest.hpp"
 #include "QuickSortTest.hpp"
+#include "RadixSortTest.hpp"
 #include "SelectionTest.hpp"
 
 #include <functional>
@@ -27,6 +29,8 @@ static const std::vector<std::function<void()>> AllTest {
     SelectionSortTest,
     MergeSortTest,
     QuickSortTest,
+    HeapSortTest,
+    RadixSortTest,
 };
 
 void run_all_test() {
