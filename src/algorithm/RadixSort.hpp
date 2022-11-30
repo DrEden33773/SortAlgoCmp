@@ -28,15 +28,15 @@ concept if_nonnegative_integer
 template <class T>
 requires if_nonnegative_integer<T>
 class RadixSortHelper {
-    static constexpr T TEN = 10;
+    static constexpr T RADIX = 65536;
 
     using vector    = std::vector<T>;
     using list      = std::list<T>;
-    using bucket_t  = std::list<T>;
+    using bucket_t  = std::vector<T>;
     using buckets_t = std::vector<bucket_t>;
 
     std::vector<T> vec;
-    buckets_t      buckets = buckets_t(TEN, bucket_t());
+    buckets_t      buckets = buckets_t(RADIX, bucket_t());
 
     explicit RadixSortHelper(std::vector<T>& toSort)
         : vec(toSort) {
@@ -46,7 +46,7 @@ class RadixSortHelper {
         for (auto num : vec) {
             int curr_len = 0;
             while (num > 0) {
-                num /= TEN;
+                num /= RADIX;
                 ++curr_len;
             }
             ret = std::max(ret, curr_len);
@@ -59,8 +59,8 @@ class RadixSortHelper {
             T   identifier  = 0;
             int curr_pos    = pos;
             while (curr_pos > 0) {
-                identifier = value_clone % TEN;
-                value_clone /= TEN;
+                identifier = value_clone % RADIX;
+                value_clone /= RADIX;
                 --curr_pos;
             }
             buckets[identifier].push_back(value);
@@ -68,7 +68,7 @@ class RadixSortHelper {
     }
     void extract_buckets() {
         int idx = 0;
-        for (int bucket_idx = 0; bucket_idx < TEN; ++bucket_idx) {
+        for (int bucket_idx = 0; bucket_idx < RADIX; ++bucket_idx) {
             auto& bucket = buckets[bucket_idx];
             for (auto&& value : bucket) {
                 vec[idx] = std::move(value);
