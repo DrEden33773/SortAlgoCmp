@@ -66,10 +66,35 @@ int Partition(std::vector<T>& vec, int begin, int end) {
 
 template <class T>
 requires std::equality_comparable<T>
+int AnotherPartition(std::vector<T>& vec, int begin, int end) {
+    int pivot       = begin;
+    int front       = begin;
+    int back        = end - 1;
+    T   pivot_value = vec[pivot];
+    while (front < back) {
+        // compare right part first
+        while (front < back && vec[back] >= pivot_value) {
+            --back;
+        }
+        std::swap(vec[front], vec[back]);
+
+        // compare left part then
+        while (front < back && vec[front] <= pivot_value) {
+            ++front;
+        }
+        std::swap(vec[front], vec[back]);
+    }
+    vec[front] = std::move(pivot_value);
+    pivot      = front;
+    return pivot;
+}
+
+template <class T>
+requires std::equality_comparable<T>
 void QS(std::vector<T>& vec, int begin, int end) {
     if (end - begin > 1) {
         // [begin, end) contain at least `2 elements`
-        int pivot = Partition(vec, begin, end);
+        int pivot = AnotherPartition(vec, begin, end);
         QS(vec, begin, pivot);
         QS(vec, pivot + 1, end);
     }
@@ -131,9 +156,43 @@ template <class Iter>
 requires std::sortable<Iter>
     and (std::random_access_iterator<Iter>
          or std::bidirectional_iterator<Iter>)
+Iter AnotherPartition(Iter begin, Iter end) {
+    using std::advance;
+    using std::distance;
+    using std::next;
+    using std::prev;
+    using std::swap;
+
+    Iter pivot       = begin;
+    auto pivot_value = *pivot;
+    Iter front       = begin;
+    Iter back        = prev(end);
+
+    size_t front_back_dist = distance(front, back);
+    while (front_back_dist > 0) {
+        while (front_back_dist > 0 && *back >= pivot_value) {
+            back = prev(back);
+            --front_back_dist;
+        }
+        std::swap(*front, *back);
+        while (front_back_dist > 0 && *front <= pivot_value) {
+            front = next(front);
+            --front_back_dist;
+        }
+        std::swap(*front, *back);
+    }
+    *front = std::move(pivot_value);
+    pivot  = front;
+    return pivot;
+}
+
+template <class Iter>
+requires std::sortable<Iter>
+    and (std::random_access_iterator<Iter>
+         or std::bidirectional_iterator<Iter>)
 void QuickSort(Iter begin, Iter end) {
     if (std::distance(begin, end) > 1) {
-        Iter pivot = Partition(begin, end);
+        Iter pivot = AnotherPartition(begin, end);
         QuickSort(begin, pivot);
         QuickSort(std::next(pivot), end);
     }
