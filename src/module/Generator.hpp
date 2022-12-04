@@ -51,8 +51,7 @@ class Generator {
         container.reserve(LEN);
         /* for-loop */
         for (int i = 0; i < LEN; ++i) {
-            int curr = 0;
-            curr     = rand() % MAX_NUM + 1;
+            int curr = rand() % MAX_NUM + 1;
             container.emplace_back(curr);
         }
         /* adjust if necessary */
