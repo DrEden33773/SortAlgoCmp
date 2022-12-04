@@ -22,7 +22,7 @@
 #include <stdexcept>
 #include <vector>
 
-namespace module {
+namespace Module {
 
 class Generator {
     static constexpr int SAMPLE_NUM   = 10;  // 10 samples
@@ -120,4 +120,4 @@ public:
     }
 };
 
-} // namespace module
+} // namespace Module
