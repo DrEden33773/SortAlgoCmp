@@ -18,6 +18,7 @@
 #include "QuickSortTest.hpp"
 #include "RadixSortTest.hpp"
 #include "SelectionTest.hpp"
+#include "ShellSortTest.hpp"
 
 #include <functional>
 
@@ -31,6 +32,7 @@ static const std::vector<std::function<void()>> AllTest {
     QuickSortTest,
     HeapSortTest,
     RadixSortTest,
+    ShellSortTest,
 };
 
 void run_all_test() {
