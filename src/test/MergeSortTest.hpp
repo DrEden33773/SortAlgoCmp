@@ -52,7 +52,6 @@ void MergeSortTest() {
 
         std::cout << std::endl;
     }
-
     end_info("MergeSort");
 }
 

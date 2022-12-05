@@ -24,16 +24,35 @@ namespace test {
 void InsertSortTest() {
     title_info("InsertSort");
 
-    std::list<int> test { 9, 2, 7, 5, 3, 4, 1, 0 };
-    std::cout << "raw => ";
-    Println(test.begin(), test.end());
+    // std::vector
+    {
+        std::vector<int> vec { 9, 2, 7, 5, 3, 4, 1, 0 };
 
-    InsertSort(test.begin(), test.end());
+        std::cout << "vec raw => ";
+        Println(vec.begin(), vec.end());
 
-    std::cout << "ascending => ";
-    Println(test.begin(), test.end());
+        InsertSort(vec);
 
-    std::cout << std::endl;
+        std::cout << "vec ascending => ";
+        Println(vec.begin(), vec.end());
+
+        std::cout << std::endl;
+    }
+    // std::list
+    {
+        std::list<int> list { 9, 2, 7, 5, 3, 4, 1, 0 };
+        // std::list<int> list {};
+
+        std::cout << "list raw => ";
+        Println(list.begin(), list.end());
+
+        InsertSort(list.begin(), list.end());
+
+        std::cout << "list ascending => ";
+        Println(list.begin(), list.end());
+
+        std::cout << std::endl;
+    }
 
     end_info("InsertSort");
 }

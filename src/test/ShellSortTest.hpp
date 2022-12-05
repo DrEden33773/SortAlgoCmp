@@ -26,7 +26,11 @@ void ShellSortTest() {
 
     // std::vector
     {
-        std::vector<int> vec { 9, 2, 7, 5, 3, 4, 1, 0 };
+        std::vector<int> vec {
+            900, 22, 71,
+            565, 3134, 41,
+            19, 0, 123
+        };
 
         std::cout << "vec raw => ";
         Println(vec.begin(), vec.end());
