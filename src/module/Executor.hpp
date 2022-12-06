@@ -110,15 +110,11 @@ class Executor {
         std::cout << std::endl;
     }
     void for_each_sample_exec() {
-        using std::cout;
-        using std::endl;
-        using std::fstream;
-
         int idx = 0;
         for (const auto& curr_path : Utility::FileManager::all_sample) {
-            cout << "Now, sort <sample " << idx << "> : ";
-            cout << endl;
-            cout << endl;
+            std::cout << "Now, sort <sample " << idx << "> : ";
+            std::cout << std::endl;
+            std::cout << std::endl;
             load_sample(curr_path);
             exec_all_sort();
             ++idx;
