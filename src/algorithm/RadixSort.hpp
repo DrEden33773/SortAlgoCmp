@@ -38,9 +38,6 @@ class RadixSortHelper {
     std::vector<T> vec;
     buckets_t      buckets = buckets_t(RADIX, bucket_t());
 
-    explicit RadixSortHelper(std::vector<T>& toSort)
-        : vec(toSort) {
-    }
     int get_max_len() {
         int ret = 0;
         for (auto num : vec) {
@@ -81,6 +78,11 @@ class RadixSortHelper {
             bucket.clear();
         }
     }
+
+public:
+    explicit RadixSortHelper(std::vector<T>& toSort)
+        : vec(toSort) {
+    }
     void executer() {
         int max_len = get_max_len();
         for (int pos = 1; pos <= max_len; ++pos) {
@@ -89,8 +91,9 @@ class RadixSortHelper {
             clean_buckets();
         }
     }
-
-public:
+    std::vector<T> return_sorted() {
+        return vec;
+    }
     static void RadixSort(std::vector<T>& toSort) {
         if (toSort.empty()) {
             return;

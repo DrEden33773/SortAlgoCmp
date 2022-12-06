@@ -9,10 +9,11 @@
  *
  */
 
+#include "TaskManager.hpp"
 #include "test/RunAllTest.hpp"
-#include <iostream>
 
 int main(int argc, char** argv) {
-    test::run_all_test();
+    // test::run_all_test();
+    Task::RunAllTask();
     return 0;
 }
