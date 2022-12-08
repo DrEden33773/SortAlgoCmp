@@ -85,6 +85,11 @@ void ShellSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;
     }
+    // PartialInsertSort(vec, 19);
+    // PartialInsertSort(vec, 17);
+    // PartialInsertSort(vec, 13);
+    // PartialInsertSort(vec, 11);
+    // PartialInsertSort(vec, 7);
     PartialInsertSort(vec, 5);
     PartialInsertSort(vec, 3);
     PartialInsertSort(vec, 1);

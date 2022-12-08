@@ -51,10 +51,15 @@ requires std::equality_comparable<T>
 void BubbleSort(std::vector<T>& vec) {
     long size = vec.size();
     for (long subbed = 0; subbed < size; ++subbed) {
+        bool if_sorted = true;
         for (long cmp = 0; cmp < size - 1 - subbed; ++cmp) {
             if (vec[cmp] > vec[cmp + 1]) {
+                if_sorted = false;
                 std::swap(vec[cmp], vec[cmp + 1]);
             }
+        }
+        if (if_sorted) {
+            break;
         }
     }
 }

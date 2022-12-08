@@ -76,13 +76,14 @@ int AnotherPartition(std::vector<T>& vec, int begin, int end) {
         while (front < back && vec[back] >= pivot_value) {
             --back;
         }
-        std::swap(vec[front], vec[back]);
-
+        // std::swap(vec[front], vec[back]);
+        vec[front] = std::move(vec[back]);
         // compare left part then
         while (front < back && vec[front] <= pivot_value) {
             ++front;
         }
-        std::swap(vec[front], vec[back]);
+        // std::swap(vec[front], vec[back]);
+        vec[back] = std::move(vec[front]);
     }
     vec[front] = std::move(pivot_value);
     pivot      = front;
