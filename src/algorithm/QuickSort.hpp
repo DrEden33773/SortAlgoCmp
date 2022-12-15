@@ -74,17 +74,22 @@ int AnotherPartition(std::vector<T>& vec, int begin, int end) {
     while (front < back) {
         // compare right part first
         while (front < back && vec[back] >= pivot_value) {
+            // `front < back` is necessary
+            // an example could be { 1, 2, 3, 4, 5 }
             --back;
         }
         // std::swap(vec[front], vec[back]);
         vec[front] = std::move(vec[back]);
         // compare left part then
         while (front < back && vec[front] <= pivot_value) {
+            // `front < back` is necessary
+            // an example could be { 1, 2, 3, 4, 5 }
             ++front;
         }
         // std::swap(vec[front], vec[back]);
         vec[back] = std::move(vec[front]);
     }
+    // now, front == back
     vec[front] = std::move(pivot_value);
     pivot      = front;
     return pivot;
@@ -175,12 +180,14 @@ Iter AnotherPartition(Iter begin, Iter end) {
             back = prev(back);
             --front_back_dist;
         }
-        std::swap(*front, *back);
+        // std::swap(*front, *back);
+        *front = std::move(*back);
         while (front_back_dist > 0 && *front <= pivot_value) {
             front = next(front);
             --front_back_dist;
         }
-        std::swap(*front, *back);
+        // std::swap(*front, *back);
+        *back = std::move(*front);
     }
     *front = std::move(pivot_value);
     pivot  = front;

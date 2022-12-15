@@ -18,7 +18,6 @@
 namespace Task {
 
 void RunAllTask() {
-
     Utility::FileManager::path_init();
     Module::Generator::generate();
     Module::Executor::exec();

@@ -28,7 +28,7 @@ concept if_nonnegative_integer
 template <class T>
 requires if_nonnegative_integer<T>
 class RadixSortHelper {
-    static constexpr T RADIX = 65536;
+    static constexpr T RADIX = 10;
 
     using vector    = std::vector<T>;
     using list      = std::list<T>;
