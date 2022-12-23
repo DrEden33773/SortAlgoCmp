@@ -57,8 +57,8 @@ void PartialInsertSort(std::vector<T>& vec, long long interval) {
     long long end   = vec.size();
     // separate into different slices
     for (long long slice_beg = begin;
-         slice_beg < end;
-         slice_beg += interval) {
+         slice_beg < begin + interval;
+         slice_beg += 1) {
         bool if_effective_slice = false;
         // try to opt on any effective slice
         for (long long curr = slice_beg + interval;
