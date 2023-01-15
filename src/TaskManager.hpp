@@ -20,8 +20,8 @@ namespace Task {
 void RunAllTask() {
     Utility::FileManager::path_init();
     Module::Generator::generate();
-    // Module::Executor::exec();
-    Module::Executor::exec_in_multi_thread();
+    // Module::Executor::exec(); // single thread exec
+    Module::Executor::exec_in_multi_thread(); // multi thread exec
 }
 
 } // namespace Task
