@@ -95,6 +95,14 @@ public:
         }
     }
 
+    // copy constructor and copy assignment operator are deleted
+    ThreadPool(const ThreadPool& copied)            = delete;
+    ThreadPool& operator=(const ThreadPool& copied) = delete;
+
+    // move constructor and move assignment operator are deleted
+    ThreadPool(ThreadPool&& moved)            = delete;
+    ThreadPool& operator=(ThreadPool&& moved) = delete;
+
 private:
     /// @brief a thread pool
     std::vector<std::thread> threads;
