@@ -5,7 +5,7 @@ target("SortAlgoCmp")
     add_files("src/*.cpp")
     set_languages("c17", "c++20")
     if is_mode("rease") then 
-        set_optimize(fastest)
+        set_optimize(faster)
     end 
 
 --
