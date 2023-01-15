@@ -26,7 +26,15 @@ concept if_nonnegative_integer
     or std::is_same_v<T, unsigned long long>;
 
 template <class T>
+concept not_recommended_integer
+    = std::is_same_v<T, short>
+    or std::is_same_v<T, int>
+    or std::is_same_v<T, long>
+    or std::is_same_v<T, long long>;
+
+template <class T>
 requires if_nonnegative_integer<T>
+    or not_recommended_integer<T> /* this one is not recommended! */
 class RadixSortHelper {
     static constexpr T RADIX = 10;
 
