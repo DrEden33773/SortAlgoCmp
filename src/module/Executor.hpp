@@ -115,12 +115,12 @@ class Executor {
     void exec_all_sort_in_multi_thread() {
         using std::chrono::microseconds;
 
-        using duration_t                  = std::chrono::duration<double, std::milli>;
+        using duration_t                = std::chrono::duration<double, std::milli>;
         using duration_name_pair        = std::pair<duration_t, std::string>;
         using future_duration_name_pair = std::pair<std::future<duration_t>, std::string>;
 
         std::map<std::future<duration_t>, std::string> time_sortName_table;
-        std::vector<future_duration_name_pair>       future_result;
+        std::vector<future_duration_name_pair>         future_result;
 
         // field only for sort (pool will continuously wait until all tasks are done)
         // this avoid `wrong format of ostream out`
@@ -128,7 +128,7 @@ class Executor {
             Utility::ThreadPool pool;
             // 1. NormalSort (except RadixSort)
             for (auto&& [sortFunc, sortName] : NormalSortTable) {
-                auto duration = pool.enqueue([=, this]() mutable {
+                auto duration = pool.enqueue([=]() mutable {
                     // get clone
                     std::vector<int> cloned = received;
                     // timing begin
@@ -151,7 +151,7 @@ class Executor {
             }
             // 2. RadixSort
             {
-                auto duration = pool.enqueue([=, this]() mutable {
+                auto duration = pool.enqueue([=]() mutable {
                     // get clone
                     std::vector<int> cloned = received;
                     // build helper
