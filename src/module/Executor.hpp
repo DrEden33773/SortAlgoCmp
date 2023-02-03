@@ -128,7 +128,7 @@ class Executor {
             Utility::ThreadPool pool;
             // 1. NormalSort (except RadixSort)
             for (auto&& [sortFunc, sortName] : NormalSortTable) {
-                auto duration = pool.enqueue([=]() mutable {
+                auto duration = pool.enqueue([=, this]() {
                     // get clone
                     std::vector<int> cloned = received;
                     // timing begin
@@ -151,7 +151,7 @@ class Executor {
             }
             // 2. RadixSort
             {
-                auto duration = pool.enqueue([=]() mutable {
+                auto duration = pool.enqueue([=, this]() {
                     // get clone
                     std::vector<int> cloned = received;
                     // build helper

@@ -22,7 +22,8 @@
 template <class T>
 requires std::equality_comparable<T>
 void Merge(std::vector<T>& vec, size_t begin, size_t mid, size_t end) {
-    using type = std::remove_cvref_t<T>;
+    // using type = std::remove_cvref_t<T>;
+    using type = T;
 
     // Merge Sorted `vec[begin : ..mid]` and `vec[mid : ..end]`
     // method => two finger
@@ -89,7 +90,10 @@ requires std::sortable<Iter>
 void Merge(Iter begin, Iter mid, Iter end) {
     using std::advance;
     using std::distance;
+
     using type = std::remove_cvref_t<decltype(*begin)>;
+    // decltype(*begin) => a reference type
+    // => reference type could not instantiate a template argument
 
     size_t len = distance(begin, end);
 

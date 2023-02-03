@@ -75,7 +75,7 @@ void PartialInsertSort(std::vector<T>& vec, long long interval) {
         if (!if_effective_slice) {
             break;
         }
-        slice_beg += interval;
+        // slice_beg += interval; // => ERROR CODE!
     }
 }
 
