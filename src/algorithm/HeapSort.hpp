@@ -63,9 +63,12 @@ void HeapSort(std::vector<T>& vec) {
         BuildMaxHeap(vec, root, end);
     }
     // 2. adjust
-    int te = end;
-    for (; te > 0; --te) {
-        std::swap(vec[0], vec[te - 1]);
-        BuildMaxHeap(vec, 0, te - 1);
+    // for (int te = end; te > 0; --te) {
+    //     std::swap(vec[0], vec[te - 1]);
+    //     BuildMaxHeap(vec, 0, te - 1);
+    // }
+    for (int back = end - 1; back > 0; --back) {
+        std::swap(vec[0], vec[back]);
+        BuildMaxHeap(vec, 0, back);
     }
 }

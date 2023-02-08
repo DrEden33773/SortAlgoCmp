@@ -33,7 +33,7 @@ void OriginalInsertSort(std::vector<T>& vec) {
 }
 
 /**
- * @brief PartialInsertSort
+ * @brief PartialInsertSort (Too Complex)
  * @warning
         `size_t` index is not allowed, for code below:
             cmp -= interval; // if use `size_t`, `overflow` must happen
@@ -75,7 +75,37 @@ void PartialInsertSort(std::vector<T>& vec, long long interval) {
         if (!if_effective_slice) {
             break;
         }
-        // slice_beg += interval; // => ERROR CODE!
+    }
+}
+
+/**
+ * @brief InsertSort_with_gap
+ *
+ * @tparam T
+ * @param vec
+ * @param gap
+ * @return requires
+ */
+template <class T>
+requires std::equality_comparable<T>
+void InsertSort_with_gap(std::vector<T>& vec, size_t gap) {
+    if (vec.empty() || vec.size() <= gap) {
+        return;
+    }
+    if (gap <= 1) {
+        OriginalInsertSort(vec);
+        return;
+    }
+    size_t begin = 0;
+    size_t end   = vec.size();
+    for (size_t curr = 0 + gap;
+         curr < end;
+         curr += gap) {
+        size_t cmp = curr;
+        while (cmp > 0 && vec[cmp] < vec[cmp - gap]) {
+            std::swap(vec[cmp], vec[cmp - gap]);
+            cmp -= gap;
+        }
     }
 }
 
@@ -85,12 +115,12 @@ void ShellSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;
     }
-    // PartialInsertSort(vec, 19);
-    // PartialInsertSort(vec, 17);
-    // PartialInsertSort(vec, 13);
-    // PartialInsertSort(vec, 11);
-    // PartialInsertSort(vec, 7);
-    PartialInsertSort(vec, 5);
-    PartialInsertSort(vec, 3);
-    PartialInsertSort(vec, 1);
+    // InsertSort_with_gap(vec, 19);
+    // InsertSort_with_gap(vec, 17);
+    // InsertSort_with_gap(vec, 13);
+    // InsertSort_with_gap(vec, 11);
+    // InsertSort_with_gap(vec, 7);
+    InsertSort_with_gap(vec, 5);
+    InsertSort_with_gap(vec, 3);
+    InsertSort_with_gap(vec, 1);
 }
