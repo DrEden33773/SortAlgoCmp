@@ -19,65 +19,6 @@
 #include <type_traits>
 #include <vector>
 
-template <class T>
-requires std::equality_comparable<T>
-void OriginalInsertSort(std::vector<T>& vec) {
-    long long size = vec.size();
-    for (long long curr = 1; curr < size; ++curr) {
-        long long cmp = curr;
-        while (cmp > 0 && vec[cmp] < vec[cmp - 1]) {
-            std::swap(vec[cmp], vec[cmp - 1]);
-            --cmp;
-        }
-    }
-}
-
-/**
- * @brief PartialInsertSort (Too Complex)
- * @warning
-        `size_t` index is not allowed, for code below:
-            cmp -= interval; // if use `size_t`, `overflow` must happen
- *
- * @tparam T
- * @param vec
- * @param interval
- * @return requires
- */
-template <class T>
-requires std::equality_comparable<T>
-void PartialInsertSort(std::vector<T>& vec, long long interval) {
-    if (vec.empty() || vec.size() <= interval) {
-        return;
-    }
-    if (interval <= 1) {
-        OriginalInsertSort(vec);
-        return;
-    }
-    long long begin = 0;
-    long long end   = vec.size();
-    // separate into different slices
-    for (long long slice_beg = begin;
-         slice_beg < begin + interval;
-         slice_beg += 1) {
-        bool if_effective_slice = false;
-        // try to opt on any effective slice
-        for (long long curr = slice_beg + interval;
-             curr < end;
-             curr += interval) {
-            // find an effective slice
-            if_effective_slice = true;
-            long long cmp      = curr;
-            while (cmp > slice_beg && vec[cmp] < vec[cmp - interval]) {
-                std::swap(vec[cmp], vec[cmp - interval]);
-                cmp -= interval;
-            }
-        }
-        if (!if_effective_slice) {
-            break;
-        }
-    }
-}
-
 /**
  * @brief InsertSort_with_gap
  *
@@ -89,20 +30,15 @@ void PartialInsertSort(std::vector<T>& vec, long long interval) {
 template <class T>
 requires std::equality_comparable<T>
 void InsertSort_with_gap(std::vector<T>& vec, size_t gap) {
-    if (vec.empty() || vec.size() <= gap) {
-        return;
-    }
     if (gap <= 1) {
-        OriginalInsertSort(vec);
-        return;
+        gap = 1;
     }
-    size_t begin = 0;
-    size_t end   = vec.size();
-    for (size_t curr = 0 + gap;
-         curr < end;
-         curr += gap) {
-        size_t cmp = curr;
-        while (cmp > 0 && vec[cmp] < vec[cmp - gap]) {
+    size_t end = vec.size();
+    for (size_t from = gap;
+         from < end;
+         from += 1) {
+        size_t cmp = from;
+        while (cmp >= gap && vec[cmp] < vec[cmp - gap]) {
             std::swap(vec[cmp], vec[cmp - gap]);
             cmp -= gap;
         }
@@ -115,12 +51,9 @@ void ShellSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;
     }
-    // InsertSort_with_gap(vec, 19);
-    // InsertSort_with_gap(vec, 17);
-    // InsertSort_with_gap(vec, 13);
-    // InsertSort_with_gap(vec, 11);
-    // InsertSort_with_gap(vec, 7);
-    InsertSort_with_gap(vec, 5);
-    InsertSort_with_gap(vec, 3);
-    InsertSort_with_gap(vec, 1);
+    size_t gap = vec.size() / 2;
+    while (gap > 0) {
+        InsertSort_with_gap(vec, gap);
+        gap /= 2;
+    }
 }

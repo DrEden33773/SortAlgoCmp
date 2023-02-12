@@ -48,9 +48,9 @@ template <class T>
 requires std::equality_comparable<T>
 void InsertSort(std::vector<T>& vec) {
     size_t size = vec.size();
-    for (size_t curr = 1; curr < size; ++curr) {
-        size_t cmp = curr;
-        while (cmp > 0 && vec[cmp] < vec[cmp - 1]) {
+    for (size_t from = 1; from < size; ++from) {
+        size_t cmp = from;
+        while (cmp >= 1 && vec[cmp] < vec[cmp - 1]) {
             std::swap(vec[cmp], vec[cmp - 1]);
             --cmp; // important
         }
