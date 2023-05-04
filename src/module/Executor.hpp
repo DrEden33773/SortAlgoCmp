@@ -116,7 +116,6 @@ class Executor {
         using std::chrono::microseconds;
 
         using duration_t                = std::chrono::duration<double, std::milli>;
-        using duration_name_pair        = std::pair<duration_t, std::string>;
         using future_duration_name_pair = std::pair<std::future<duration_t>, std::string>;
 
         std::map<std::future<duration_t>, std::string> time_sortName_table;
@@ -128,7 +127,7 @@ class Executor {
             Utility::ThreadPool pool;
             // 1. NormalSort (except RadixSort)
             for (auto&& [sortFunc, sortName] : NormalSortTable) {
-                auto duration = pool.enqueue([=, this]() {
+                auto duration = pool.enqueue([sortFunc, sortName, this]() {
                     // get clone
                     std::vector<int> cloned = received;
                     // timing begin
@@ -150,32 +149,30 @@ class Executor {
                 future_result.emplace_back(std::move(duration), sortName);
             }
             // 2. RadixSort
-            {
-                auto duration = pool.enqueue([=, this]() {
-                    // get clone
-                    std::vector<int> cloned = received;
-                    // build helper
-                    RadixSortHelper<int> Helper(cloned);
-                    // timing begin
-                    auto begin_time = std::chrono::system_clock::now();
-                    // exec
-                    Helper.executer();
-                    // timing end
-                    auto end_time = std::chrono::system_clock::now();
-                    // return sorted
-                    cloned = Helper.return_sorted();
-                    // assert
-                    Utility::assert_if_ascending_order(cloned);
-                    // duration
-                    std::chrono::duration<double, std::milli> duration = end_time - begin_time;
-                    // output tips
-                    std::cout << "RadixSort is over!"
-                              << "\n";
-                    // return std::future<duration>
-                    return duration;
-                });
-                future_result.emplace_back(std::move(duration), "RadixSort");
-            }
+            auto duration = pool.enqueue([this]() {
+                // get clone
+                std::vector<int> cloned = received;
+                // build helper
+                RadixSortHelper<int> Helper(cloned);
+                // timing begin
+                auto begin_time = std::chrono::system_clock::now();
+                // exec
+                Helper.executer();
+                // timing end
+                auto end_time = std::chrono::system_clock::now();
+                // return sorted
+                cloned = Helper.return_sorted();
+                // assert
+                Utility::assert_if_ascending_order(cloned);
+                // duration
+                std::chrono::duration<double, std::milli> duration = end_time - begin_time;
+                // output tips
+                std::cout << "RadixSort is over!"
+                          << "\n";
+                // return std::future<duration>
+                return duration;
+            });
+            future_result.emplace_back(std::move(duration), "RadixSort");
         }
         std::cout << "\n";
         // build true result

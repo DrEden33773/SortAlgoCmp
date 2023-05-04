@@ -4,7 +4,7 @@ target("SortAlgoCmp")
     set_kind("binary")
     add_files("src/*.cpp")
     set_languages("c17", "c++20")
-    if is_mode("rease") then 
+    if is_mode("release") then 
         set_optimize(faster)
     end 
 

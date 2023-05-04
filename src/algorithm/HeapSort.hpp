@@ -41,11 +41,10 @@ void BuildMaxHeap(std::vector<T>& vec, int root, int end) {
         // 2. cmp dad and max son
         if (vec[dad] > vec[son]) {
             return; // OK
-        } else {
-            std::swap(vec[dad], vec[son]);
-            dad = son;
-            son = 2 * dad + 1;
         }
+        std::swap(vec[dad], vec[son]);
+        dad = son;
+        son = 2 * dad + 1;
     }
 }
 template <class T>
