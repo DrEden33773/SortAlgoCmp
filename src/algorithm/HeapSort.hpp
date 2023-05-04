@@ -29,7 +29,7 @@
  *
  */
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void BuildMaxHeap(std::vector<T>& vec, int root, int end) {
     int dad = root;
     int son = 2 * dad + 1;
@@ -48,7 +48,7 @@ void BuildMaxHeap(std::vector<T>& vec, int root, int end) {
     }
 }
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void HeapSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;

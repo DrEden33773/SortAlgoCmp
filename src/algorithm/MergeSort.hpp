@@ -20,7 +20,7 @@
 #include <vector>
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void Merge(std::vector<T>& vec, size_t begin, size_t mid, size_t end) {
     // using type = std::remove_cvref_t<T>;
     using type = T;
@@ -64,7 +64,7 @@ void Merge(std::vector<T>& vec, size_t begin, size_t mid, size_t end) {
 // sort vec[begin : ..end]
 // (index in [begin, end))
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void MS(std::vector<T>& vec, size_t begin, size_t end) {
     if (end - begin > 1) { // [begin,end), at least contain one elem
         size_t mid = (begin + end) / 2;
@@ -75,7 +75,7 @@ void MS(std::vector<T>& vec, size_t begin, size_t end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void MergeSort(std::vector<T>& vec) {
     if (!vec.size()) {
         return;

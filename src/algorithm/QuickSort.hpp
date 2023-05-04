@@ -30,7 +30,7 @@
  */
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 int Partition(std::vector<T>& vec, int begin, int end) {
     // set pivot
     int pivot = (begin + end) / 2;
@@ -65,7 +65,7 @@ int Partition(std::vector<T>& vec, int begin, int end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 int AnotherPartition(std::vector<T>& vec, int begin, int end) {
     int pivot       = begin;
     int front       = begin;
@@ -96,7 +96,7 @@ int AnotherPartition(std::vector<T>& vec, int begin, int end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void QS(std::vector<T>& vec, int begin, int end) {
     if (end - begin > 1) {
         // [begin, end) contain at least `2 elements`
@@ -107,7 +107,7 @@ void QS(std::vector<T>& vec, int begin, int end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void QuickSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;

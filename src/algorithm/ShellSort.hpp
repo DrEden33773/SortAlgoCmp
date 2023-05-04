@@ -28,7 +28,7 @@
  * @return requires
  */
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void InsertSort_with_gap(std::vector<T>& vec, size_t gap) {
     if (gap <= 1) {
         gap = 1;
@@ -46,7 +46,7 @@ void InsertSort_with_gap(std::vector<T>& vec, size_t gap) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void ShellSort(std::vector<T>& vec) {
     if (vec.empty()) {
         return;

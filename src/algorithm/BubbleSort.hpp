@@ -47,7 +47,7 @@ void BubbleSort(Iter begin, Iter end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void BubbleSort(std::vector<T>& vec) {
     long size = vec.size();
     for (long subbed = 0; subbed < size; ++subbed) {

@@ -18,8 +18,8 @@
 namespace Utility {
 
 template <typename T>
-requires std::equality_comparable<T> bool
-if_ascending_order(const std::vector<T>& vec) {
+requires std::totally_ordered<T>
+bool if_ascending_order(const std::vector<T>& vec) {
     if (vec.empty() || vec.size() == 1) {
         return true;
     }
@@ -33,7 +33,7 @@ if_ascending_order(const std::vector<T>& vec) {
 }
 
 template <typename T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void assert_if_ascending_order(const std::vector<T>& vec) {
     if (!if_ascending_order(vec)) {
         throw std::runtime_error("Input Vec is not ascending-ordered!");

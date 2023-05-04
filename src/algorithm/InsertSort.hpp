@@ -45,7 +45,7 @@ void InsertSort(Iter begin, Iter end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void InsertSort(std::vector<T>& vec) {
     size_t size = vec.size();
     for (size_t from = 1; from < size; ++from) {

@@ -50,7 +50,7 @@ void SelectionSort(Iter begin, Iter end) {
 }
 
 template <class T>
-requires std::equality_comparable<T>
+requires std::totally_ordered<T>
 void SelectionSort(std::vector<T>& vec) {
     size_t size = vec.size();
     for (size_t expect = 0; expect < size - 1; ++expect) {
